@@ -22,7 +22,7 @@ def index(request):
     return render(request,'base/index.html')
 
 def sendMail(request):
-    mailStatus = " "
+    # mailStatus = " "
     if request.method == 'POST':
         # form = mailForm(request.POST)
         data = request.POST.dict()
@@ -38,10 +38,10 @@ def sendMail(request):
         result.send()
 
         if result: 
-            mailStatus = "Thanks For Contact us!"
-            return render(request,'base/index.html',{'mailStatus':mailStatus})
+            # mailStatus = "Thanks For Contact us!"
+            return HttpResponseRedirect('/')
         else:
-            mailStatus = "Try again!"
-            return render(request,'base/index.html',{'mailStatus':mailStatus})
+            # mailStatus = "Try again!"
+            return HttpResponseRedirect('/')
     else:
         return render(request,'base/index.html')
