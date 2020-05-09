@@ -174,6 +174,6 @@ SOCIAL_AUTH_GITHUB_SECRET = '747083ccdef8c6d7a978bc45a1cc5bde483eee60'
 django_heroku.settings(locals())
 
 try:
-    from .local_seetings import *
+    from .local_settings import *
 except ImportError:
-    pass
+    pass 
