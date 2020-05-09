@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'x+$t-1vmxeq=(vpf)55@+%8e(6i())o74z^zfh_sba%3#$(hy3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kr-library.herokuapp.com']
 
 
 #mail 
@@ -168,3 +169,11 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'af40c7874367d2194698b94c8b187c49'
 
 SOCIAL_AUTH_GITHUB_KEY = '1d818db13d7f69c8f87f'
 SOCIAL_AUTH_GITHUB_SECRET = '747083ccdef8c6d7a978bc45a1cc5bde483eee60' 
+
+
+django_heroku.settings(locals())
+
+try:
+    from .local_seetings import *
+except ImportError:
+    pass
