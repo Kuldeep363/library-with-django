@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+
+{% block page_title %} <title>Signup</title> {% endblock %}
+
+{% block container %}
+    <div >
+        <div class="text-center" style='font-size: 40px;'>
+            Signup
+        </div>
+        <div class="d-flex justify-content-end"><a href="{% url 'home' %}"><button class="btn btn-secondary">HOME</button></a></div>
+        <div style="display: flex; justify-content: center;">
+            <form action="{% url 'signup' %}" method="POST" style="width: 500px;">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.name == 'password2'%}
+                        <small class="text-center" style="color: #e91010;margin-bottom: 10px;">
+                            {{ password_error }}
+                        </small>
+                    {% elif field.name == 'email' %}
+                        <small class="text-center" style="color: #e91010;margin-bottom: 10px;">
+                            {{ email_error }}
+                        </small>
+                    {% endif %}
+                    <ul style="list-style: none;padding: 0;margin: 0;">
+                        {% for error in field.errors %}
+                        <li style="color:#e91010"><small>{{error}}</small></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+                
+                <div class="text-center">
+                    <input type="submit" class="btn btn-primary" style="width: 80%;" value="SIGNUP">
+                </div>
+            </form>
+
+        </div>
+        <p class="text-center">Already have an account?<a href="{% url 'login' %}" style="text-decoration:none">login</a></p>
+    </div>
+
+{% endblock %}

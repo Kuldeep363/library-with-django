@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block container %}
+    <h1 style="text-align: center;">Welcome to Library</h1>
+    <div class="d-flex justify-content-center m-3">
+        <a href="{% url 'bookBank' %}"><button class="btn btn-danger">Book Bank</button></a>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="book-bank/" method="GET">
+            <input type="search" name="search" value="{{request.GET.search}}" class="form-control" style="display: inline-block;width: 70%;">
+            <input type="submit" value="search" class="btn btn-success ml-2">
+        </form>
+    </div>
+    <div class="d-flex justify-content-center">
+        {% if request.user.is_authenticated and request.user.is_active %}
+            <a href="{% url 'addBook' %}"><button class="btn btn-primary m-3">ADD BOOK</button></a>
+            <a href="{% url 'dashboard' %}"><button class="btn btn-primary m-3">Dashboard</button></a>
+            <a href="{% url 'logout' %}"> <button class="btn btn-primary m-3">Log Out</button></a>
+        {% else %}
+            <a href="{% url 'signup' %}"><button class="btn btn-primary m-3">Sign Up</button></a>
+            <a href="{% url 'dashboard' %}"><button class="btn btn-primary m-3">Dashboard</button></a>
+            <a href="{% url 'login' %}"><button class="btn btn-primary m-3">Login In</button></a>
+        {% endif %}
+    </div>
+    <p class="success">{{ Status }}</p>
+    <div class="d-flex justify-content-center">
+        <form action="{% url 'mail' %}" method="POST" style="width:400px">
+            {% csrf_token %}
+            <label for="name">NAME</label>
+            <input type="text" name="username" id="name" class="form-control">
+
+            <label for="mobile">MOBILE NO.</label>
+            <input type="tel" name="mobile" id="mobile" class="form-control">
+
+            <label for="mail">EMAIL</label>
+            <input type="mail" name="mail" id="mail" class="form-control">
+
+            <label for="message">MESSAGE</label>
+            <textarea  name="msg" id="message" class="form-control"></textarea>
+            <div class="form-group text-center">
+                <input type="submit" value="SEND QUERY" class="btn btn-primary m-3 " style="width: 60%;">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

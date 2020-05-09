@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'bookBank/css/base.css' %}">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+{%  block page_title %} <title>{{book.title}} Details | {{book.title}} Book Details </title> {% endblock %}
+{% block container %}
+    <div class="container mt-2">
+        <div class="text-center">
+            <img src="{{ book.img_thumbnail.url }}" alt="{{book.title}}" style="border: 3px solid rgb(223, 221, 221);border-radius: 3px;width: 30%;height: 400px;">
+        </div>
+        <div class="text-center" style="text-transform: uppercase;font-size: 30px;color: aqua;font-family: Arial, Helvetica, sans-serif;font-weight: 400;">{{book.title}}</div>
+        <div class="d-flex justify-content-center">
+            <div class="text-left" style="width: 60%;">{{book.description}}</div>
+        </div>
+        
+        <div class="d-flex justify-content-center m-2" >
+            {% for auth in book.authors.all %}
+            <div class="text-center m-2">
+                <a href="{% url 'author' auth.slug %}" class="card-author">{{auth}} </a>
+            </div>
+            {% endfor %}
+            <div class="text-center m-2">Price:RS. {{book.price}}</div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'download' book.slug %}" download><button class="btn btn-success"><span><img src="{% static 'bookBank/images/arrows.png' %}" alt="download books | download pdf" style="width: 20px;height: 20px;"></span>DOWNLOAD</button></a>
+        </div>
+    </div>
+    
+        {% if similar_books %}
+        <div class="text-center mt-5">
+            <p style="color: red;font-size: 50px;font-family: Arial, Helvetica, sans-serif;">Similar Books</p>
+        </div>
+            {% for same_book in similar_books %}
+                {% if same_book.subject == book.subject and same_book.slug != book.slug %}
+                
+                <div class="card" style="flex-direction: row;">
+                    <div class="img"><img src="{{ same_book.image.url }}" alt="{{same_book.title}}" style="width: 300px;height:100%" class="img  p-2"></div>
+                    <div >
+                        <div class="card-title">{{same_book.title}}<a href="{% url 'subject' same_book.subject.slug %}">({{same_book.subject}})</a></div>
+                        <div class="card-des " >{{same_book.description | truncatechars:150}} </div>
+                        <hr>             
+                        <div class="flex">
+                            {% for auth in same_book.authors.all %}     
+                                <a href="{% url 'author' auth.slug %}" class="card-author">{{auth}} </a>
+                            {% endfor %}      
+                            <div class="card-price">RS. {{same_book.price}} </div>   
+                        </div>
+                        <hr>                
+                        <div class="d-flex justify-content-center">
+                            <div><a href="{% url 'editBook' same_book.slug %}" ><button class="btn btn-primary m-2" style="width: 100px;">EDIT</button></a></div> 
+                            <div><a href="{% url 'delete' same_book.slug %}"><button class="btn btn-primary m-2" style="width: 100px;">DELETE</button></a></div>
+                        </div>
+                        <div class="text-center"><a href="{% url 'details' same_book.slug %}"><button class="btn btn-success m-2" style="width: 60%;">GET BOOK</button></a></div>
+                    </div>    
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    
+{% endblock %}

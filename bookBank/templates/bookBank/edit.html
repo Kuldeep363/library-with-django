@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block container %}
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <!-- {{ form.non_field_errors }}
+            <div class="form-group">
+                {{form.price.label_tag}}
+                {{form.price}}
+                {{form.price.errors}}
+            </div>
+            <div class="form-group">
+                {{form.description.label_tag}}
+                {{form.description}}
+                {{form.description.errors}}
+            </div> -->
+            {{form}}
+            <input type="submit" value="submit" class="btn btn-primary">
+        </form>
+    </div>
+{% endblock %}

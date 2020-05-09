@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block container %}
+
+    <div class="container">
+        <div style="text-align: center;"><img src="{% static 'base/images/icons8-user-100.png' %}" alt=""></div>
+        <div class="author-name" style="text-align: center;color: aqua;font-size: 30px;">{{author}} </div>
+        <p style="text-align: center;font-size: 20px;color: blueviolet;margin-top: 10px;margin-bottom: 10px;">Books</p>
+        <div class="books" style="display: flex;justify-content: center;flex-direction: column;">
+            {% for auth in book %}
+                <div style="width: 80vw;text-align: center;background-color: bisque;font-weight: bold;"><span> Book:{{auth.title}}</span> | <span>Price:RS. {{auth.price}}</span></div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

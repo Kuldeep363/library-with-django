@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block page_title %} <title>Dashboard</title> {% endblock %}
+
+{% block container %}
+    <div style="text-align: center;font-size: 40px;color: blueviolet;font-family: Arial, Helvetica, sans-serif;">
+        DASHBOARD   
+    </div>
+    <div class="d-flex justify-content-end"><a href="{% url 'home' %}" class="m-2"><button class="btn btn-secondary">HOME</button></a></div>
+
+    {% if user.is_active %}
+    <div class="text-right" style="font-size:50px;text-transform: uppercase;color: aqua;"> {{user.first_name}}</div>
+    <div style="display: flex; justify-content:start;">
+        <div>
+            <a href="{% url 'logout' %}" class="m-2"><button class="btn btn-primary">Logout</button></a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="alert alert-success text-center alert-dismissible" style="width: 60%;">
+            <button type="button" class="close" data-dismiss="alert" style="outline: none;">&times;</button>
+             WELCOME <strong> {{user.first_name}}</strong><br>
+            <p>{{ active }}</p>
+        </div>   
+    </div>
+
+    {% else %}
+        <div>
+            <p class="text-center alert alert-warning" style="width: 60%;">Hey {{user.username}} your account is not active. Please check your mail to activate your account.<br>Thank You.</p>
+        </div>
+        <div>
+            <a href="{% url 'logout' %}"><button class="btn btn-primary">Logout</button></a>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block links %}
+    <link rel="stylesheet" href="{% static 'bookBank/css/base.css' %}">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+{% endblock %}
+
+{% block page_title %} <title> Book Bank | get your books | download books | download free books</title> {% endblock %}
+{% block container %}
+        <div class="text-center" style="color: aqua; font-size: 50px;font-family: Arial, Helvetica, sans-serif;">BOOK BANK</div>
+    {% if book %}
+
+    {% for bk in book %}
+        
+            <div class="card" style="flex-direction: row;align-items: center;">
+                <div class="img"><img src="{{ bk.img_thumbnail.url }}" alt="{{bk.title}}" style="width: 300px;height:100%" class="img-cover  p-2"></div>
+                <div >
+                    <div class="card-title">{{bk.title}}<a href="{% url 'subject' bk.subject.slug %}">({{bk.subject}})</a></div>
+                    <div class="card-des " >{{bk.description | truncatechars:150}} </div>
+                    <hr>
+                    <div class="flex">
+                        {% for auth in bk.authors.all %}
+                            <a href="{% url 'author' auth.slug %}" class="card-author">{{auth}} </a>
+                        {% endfor %}
+                        <div class="card-price">RS. {{bk.price}} </div>   
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-center">
+                        <div><a href="{% url 'editBook' bk.slug %}" ><button class="btn btn-primary m-2" style="width: 100px;">EDIT</button></a></div> 
+                        <div><a href="{% url 'delete' bk.slug %}"><button class="btn btn-primary m-2" style="width: 100px;">DELETE</button></a></div>
+                    </div>
+                    <div class="text-center"><a href="{% url 'details' bk.slug %}"><button class="btn btn-success m-2" style="width: 60%;">GET BOOK</button></a></div>
+                </div>    
+            </div>
+    {% endfor %}
+
+            {% else %}
+                <p class="alert">No Book Found....</p>
+            {% endif %}
+{% endblock %}
