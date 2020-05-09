@@ -36,7 +36,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'kuldeep363rawat@gmail.com'  
 EMAIL_HOST_PASSWORD = 'rawstar363@'  
 
-
+SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
