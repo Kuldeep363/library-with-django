@@ -6,7 +6,7 @@ from django.conf import settings
 from django.db.utils import IntegrityError
 
 from social_core.utils import setting_name
-
+ 
 from .compat import get_rel_model
 from .storage import DjangoUserMixin, DjangoAssociationMixin, \
                      DjangoNonceMixin, DjangoCodeMixin, \
