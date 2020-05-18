@@ -21,3 +21,4 @@ class Migration(migrations.Migration):
             field=models.FileField(blank=True, upload_to='files'),
         ),
     ]
+ 
