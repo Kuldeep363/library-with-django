@@ -33,13 +33,13 @@ class books(models.Model):
     price = models.IntegerField(blank=True,default = 500)
     description = models.TextField(blank=True)
     subject = models.ForeignKey(subjects,on_delete=models.PROTECT,null=True)
-    # image = models.ImageField(default = ' ', blank=True, upload_to = 'images' )
-    # img_thumbnail = ImageSpecField(source='image',
-    #                 processors=[ResizeToFit(300,600)],
-    #                 format='jpeg',
-    #                 options={'quality':70}
-    #         )
-    # pdf_file = models.FileField(default = ' ', blank = True, upload_to = 'files')
+    image = models.ImageField(blank=True, upload_to = 'images' )
+    img_thumbnail = ImageSpecField(source='image',
+                    processors=[ResizeToFit(300,600)],
+                    format='jpeg',
+                    options={'quality':70}
+            )
+    pdf_file = models.FileField(blank = True, upload_to = 'files')
     slug = models.SlugField(blank=True)
     
     def __str__(self):
