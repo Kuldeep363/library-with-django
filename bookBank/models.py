@@ -39,7 +39,7 @@ class books(models.Model):
     #                 format='jpeg',
     #                 options={'quality':70}
     #         )
-    pdf_file = models.FileField(default = ' ', blank = True, upload_to = 'files')
+    # pdf_file = models.FileField(default = ' ', blank = True, upload_to = 'files')
     slug = models.SlugField(blank=True)
     
     def __str__(self):

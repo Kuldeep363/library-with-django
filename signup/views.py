@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate,login
 from .forms import ( signupForm, password_reset_form, password_reseting_form )
 from django.contrib.sites.shortcuts import get_current_site
@@ -42,7 +42,7 @@ def signup(request):
                     to_mail = form.cleaned_data.get('email')
                     send_mail(mail_subject,message,settings.EMAIL_HOST_USER,[to_mail])
                     activate = 'Check your mail for account activation link.'
-                    return render(request,'base/index.html',{'activate':activate})
+                    return HttpResponseRedirect('/',{'activate':activate})
             else:
                 email_error = 'This email address is already in use'
             
